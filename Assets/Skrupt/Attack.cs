@@ -1,29 +1,25 @@
 using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(Health))]
-
 public class Attack : TriggerAttak
 {
     private void Update()
     {
-        if (_attack == null)
+        if (_attack == null && _nearestCharacterInRange != null)
         {
-            _attack = StartCoroutine(AttackCoroutine());
+            _attack = StartCoroutine(BasicAttack());
         }
     }
 
-    private IEnumerator AttackCoroutine()
+    private IEnumerator BasicAttack()
     {
         WaitForSeconds wait = new(_attackCooldown);
+        Health character = _nearestCharacterInRange.GetComponent<Health>();
 
-        while (_charactersInRange.Count > NullIndex)
+        while (true)
         {
-            foreach (Collider2D character in _charactersInRange)
-            {
-                character.GetComponent<Health>().TakeDamage(_attackDamage);
-            }
-
+            character.TakeDamage(_attackDamage);
+            
             yield return wait;
         }
     }
