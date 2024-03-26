@@ -7,7 +7,6 @@ public class EnemyMover : MonoBehaviour
 
     [SerializeField] private Transform[] _waypoints;
     [SerializeField] private float _speed = 2f;
-    [SerializeField] private float _viewRadius =10f;
     
     private int _currentWaypointIndex = 0;
     private Vector2 _direction;
